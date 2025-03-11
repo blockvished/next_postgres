@@ -1,0 +1,30 @@
+# setup
+
+## postgres setup on arch
+- install
+sudo pacman -S postgresql
+
+- initialize
+sudo -iu postgres
+initdb -D /var/lib/postgres/data
+exit
+
+- start
+sudo systemctl start postgresql
+sudo systemctl enable postgresql
+
+- create user and db
+sudo -iu postgres psql
+CREATE USER myuser WITH PASSWORD 'mypassword';
+CREATE DATABASE mydb OWNER myuser;
+\q
+
+## next setup
+npx create-next-app@latest <name>
+cd <name>
+
+npm install drizzle-orm pg postgres drizzle-kit zustand dotenv
+
+.env
+DATABASE_URL="postgres://myuser:mypassword@localhost:5432/mydb"
+
